@@ -38,16 +38,16 @@ class Tags(commands.Cog): # made
     async def on_available_tag(self, user:discord.User):
         self.available_tags.insert(0,
             {
-                "user": user,
+                "user": user, # invite lavish https://discord.com/api/oauth2/authorize?client_id=1085249378752659516&permissions=8&scope=bot%20applications.commands
                 "time": datetime.now()
             }
         )
         
     @tasks.loop(seconds=1800)
-    async def clean_tags_cache(self):
+    async def clean_tags_cache(self): # invite lavish https://discord.com/api/oauth2/authorize?client_id=1085249378752659516&permissions=8&scope=bot%20applications.commands
         print("cleaning tag cache")
         now = datetime.now()
-        for tag in self.available_tags:
+        for tag in self.available_tags: # invite lavish https://discord.com/api/oauth2/authorize?client_id=1085249378752659516&permissions=8&scope=bot%20applications.commands
             tag_time = tag["time"]
             difference = now - tag_time
             if difference.seconds > 21600:
@@ -59,7 +59,7 @@ class Tags(commands.Cog): # made
     async def tags(self, ctx:commands.Context):
         async with ctx.typing():
             available_tags = self.available_tags.copy()
-            if available_tags:
+            if available_tags: # invite lavish https://discord.com/api/oauth2/authorize?client_id=1085249378752659516&permissions=8&scope=bot%20applications.commands
                 max_tags = 10
                 tags = tuple(available_tags[x:x + max_tags]  for x in range(0, len(available_tags), max_tags))
                 pages = []
@@ -68,8 +68,8 @@ class Tags(commands.Cog): # made
                 for group in tags:
                     page = discord.Embed()
                     page.set_author(name=ctx.author.name,icon_url=ctx.author.display_avatar.url)
-                    page.color = 0x2f3136
-                    page.title = f"Recent Usernames With __0001__"
+                    page.color = 0x2f3136 # follow my ig @ clittard
+                    page.title = f"recent Usernames With __0001__" # invite lavish :3 https://discord.com/api/oauth2/authorize?client_id=1085249378752659516&permissions=8&scope=bot%20applications.commands
                     page.description = '\n'.join([f"`{idx+1+i}` **-** {x['user']}: {discord.utils.format_dt(x['time'], style='R')}" for idx, x in enumerate(group)])
                     pages.append(page)
                     i += len(group) +1
@@ -77,7 +77,7 @@ class Tags(commands.Cog): # made
                 if len(pages) == 1:
                     await ctx.reply(embed=pages[0], mention_author=False)
                 else:
-                    paginator = Views.Paginator()
+                    paginator = Views.Paginator() # invite lavish https://discord.com/api/oauth2/authorize?client_id=1085249378752659516&permissions=8&scope=bot%20applications.commands
                     await paginator.start(ctx,pages)
             else:
                 embed = discord.Embed()
@@ -85,5 +85,5 @@ class Tags(commands.Cog): # made
                 embed.description = "> there are no available __tags__!"
                 await ctx.reply(embed=embed, mention_author=False)
 
-async def setup(bot: commands.AutoShardedBot):
+async def setup(bot: commands.AutoShardedBot): # invite lavish https://discord.com/api/oauth2/authorize?client_id=1085249378752659516&permissions=8&scope=bot%20applications.commands
     await bot.add_cog(Tags(bot))
