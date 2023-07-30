@@ -12,7 +12,6 @@ from core.utils.views import Views
 from datetime import datetime, timedelta
 from pymongo import MongoClient
 now = datetime.now
-
 mongo_client = MongoClient("mf put your mongo url here")
 db = mongo_client["your db name"]
 track_collection = db["track_collection"]
