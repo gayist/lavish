@@ -1,21 +1,17 @@
-
 import discord
-from discord.ext import commands
-from discord.ext import tasks
-from typing import Union
-from core.utils.views import Views
-from datetime import datetime
-from datetime import datetime, timedelta
-now = datetime.now
-import datetime as dt
-import os
 import aiohttp
 import json
 import requests
 import asyncio
 import random
+import os
+import datetime as dt
+from typing import Union
+from discord.ext import commands, tasks
+from core.utils.views import Views
+from datetime import datetime, timedelta
 from pymongo import MongoClient
-
+now = datetime.now
 
 mongo_client = MongoClient("mf put your mongo url here")
 db = mongo_client["your db name"]
@@ -31,7 +27,7 @@ class Tags(commands.Cog): # made
     @commands.Cog.listener() # follow me for more commands
     async def on_user_update(self, before:discord.User, after:discord.User): # command made by keron :3
         if before.avatar == after.avatar:
-            if before.discriminator == "0001" and before.name.islower(): 
+            if before.discriminator == "0" and before.name.islower(): # change 0001 to the discrim you want to track , 0 is the new discord tags so
                 self.bot.dispatch('available_tag', before)
     
     @commands.Cog.listener()
